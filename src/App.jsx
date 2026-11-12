@@ -70,24 +70,40 @@ export default function App() {
   return (
     <div
       style={{
-        padding: "30px",
-        fontFamily: "Arial, sans-serif",
+        padding: "40px",
+        fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
         backgroundColor: "#f8fafc",
         minHeight: "100vh",
+        maxWidth: "1000px",
+        margin: "0 auto",
       }}
     >
+      {/* Header */}
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          marginBottom: "20px",
+          marginBottom: "24px",
+          borderBottom: "1px solid #e2e8f0",
+          paddingBottom: "16px",
         }}
       >
         <div>
-          <h1 style={{ margin: 0, color: "#0f172a" }}>Manajemen Produk</h1>
-          <p style={{ color: "#64748b", margin: "4px 0 0 0" }}>
-            Kelola daftar produk dan harga dalam satu tempat.
+          <h1
+            style={{
+              margin: 0,
+              color: "#0f172a",
+              fontSize: "28px",
+              fontWeight: "700",
+            }}
+          >
+            Manajemen Produk
+          </h1>
+          <p
+            style={{ color: "#64748b", margin: "6px 0 0 0", fontSize: "14px" }}
+          >
+            Kelola daftar produk dan harga dalam satu tempat dengan mudah.
           </p>
         </div>
         <button
@@ -96,22 +112,25 @@ export default function App() {
             backgroundColor: "#2563eb",
             color: "white",
             border: "none",
-            padding: "10px 16px",
-            borderRadius: "6px",
-            fontWeight: "bold",
+            padding: "10px 18px",
+            borderRadius: "8px",
+            fontWeight: "600",
             cursor: "pointer",
+            fontSize: "14px",
+            boxShadow: "0 2px 4px rgba(37,99,235,0.2)",
           }}
         >
           + Tambah Produk
         </button>
       </div>
 
+      {/* Search & Counter */}
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          marginBottom: "20px",
+          marginBottom: "24px",
         }}
       >
         <input
@@ -121,22 +140,25 @@ export default function App() {
           onChange={(e) => setSearchTerm(e.target.value)}
           style={{
             padding: "10px 14px",
-            width: "300px",
-            borderRadius: "6px",
+            width: "320px",
+            borderRadius: "8px",
             border: "1px solid #cbd5e1",
+            fontSize: "14px",
+            outline: "none",
           }}
         />
-        <span style={{ color: "#64748b", fontSize: "14px" }}>
-          {filteredProducts.length} produk
+        <span style={{ color: "#64748b", fontSize: "14px", fontWeight: "500" }}>
+          Total: {filteredProducts.length} produk
         </span>
       </div>
 
+      {/* Grid Produk */}
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
           gap: "16px",
-          marginBottom: "20px",
+          marginBottom: "24px",
         }}
       >
         {filteredProducts.map((product) => (
@@ -144,39 +166,60 @@ export default function App() {
             key={product.id}
             style={{
               backgroundColor: "white",
-              padding: "16px",
-              borderRadius: "8px",
+              padding: "20px",
+              borderRadius: "10px",
               border: "1px solid #e2e8f0",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.02)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
             }}
           >
-            <span style={{ fontSize: "12px", color: "#94a3b8" }}>
-              ID: {product.id}
-            </span>
-            <h3 style={{ margin: "8px 0 4px 0", color: "#1e293b" }}>
-              {product.name}
-            </h3>
-            <p
-              style={{
-                color: "#2563eb",
-                fontWeight: "bold",
-                fontSize: "16px",
-                margin: "0 0 16px 0",
-              }}
-            >
-              Rp{product.price.toLocaleString("id-ID")}
-            </p>
+            <div>
+              <span
+                style={{
+                  fontSize: "11px",
+                  fontWeight: "600",
+                  color: "#94a3b8",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.5px",
+                }}
+              >
+                ID: {product.id}
+              </span>
+              <h3
+                style={{
+                  margin: "8px 0 6px 0",
+                  color: "#1e293b",
+                  fontSize: "18px",
+                }}
+              >
+                {product.name}
+              </h3>
+              <p
+                style={{
+                  color: "#2563eb",
+                  fontWeight: "700",
+                  fontSize: "16px",
+                  margin: "0 0 16px 0",
+                }}
+              >
+                Rp{product.price.toLocaleString("id-ID")}
+              </p>
+            </div>
             <div style={{ display: "flex", gap: "8px" }}>
               <button
                 onClick={() => handleOpenEdit(product)}
                 style={{
                   flex: 1,
-                  padding: "6px",
-                  backgroundColor: "white",
+                  padding: "8px",
+                  backgroundColor: "#f8fafc",
                   border: "1px solid #cbd5e1",
-                  borderRadius: "4px",
+                  borderRadius: "6px",
                   cursor: "pointer",
                   color: "#334155",
+                  fontWeight: "500",
+                  fontSize: "13px",
                 }}
               >
                 Edit
@@ -185,12 +228,14 @@ export default function App() {
                 onClick={() => handleOpenDelete(product)}
                 style={{
                   flex: 1,
-                  padding: "6px",
-                  backgroundColor: "white",
-                  border: "1px solid #ef4444",
-                  borderRadius: "4px",
+                  padding: "8px",
+                  backgroundColor: "#fef2f2",
+                  border: "1px solid #fecaca",
+                  borderRadius: "6px",
                   cursor: "pointer",
-                  color: "#ef4444",
+                  color: "#dc2626",
+                  fontWeight: "500",
+                  fontSize: "13px",
                 }}
               >
                 Hapus
@@ -200,10 +245,18 @@ export default function App() {
         ))}
       </div>
 
-      <p style={{ color: "#64748b", fontSize: "14px" }}>
+      <div
+        style={{
+          textAlign: "center",
+          color: "#94a3b8",
+          fontSize: "13px",
+          marginTop: "20px",
+        }}
+      >
         Menampilkan {filteredProducts.length} dari {products.length} produk
-      </p>
+      </div>
 
+      {/* Modal / Pop-up */}
       {activeModal && (
         <div
           style={{
@@ -212,21 +265,23 @@ export default function App() {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0,0,0,0.4)",
+            backgroundColor: "rgba(15, 23, 42, 0.5)",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            zIndex: 1000,
           }}
         >
           <div
             style={{
               backgroundColor: "white",
-              padding: "24px",
-              borderRadius: "8px",
-              width: "380px",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+              padding: "28px",
+              borderRadius: "12px",
+              width: "400px",
+              boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
             }}
           >
+            {/* Modal Tambah */}
             {activeModal === "add" && (
               <form onSubmit={handleSaveAdd}>
                 <div
@@ -234,10 +289,12 @@ export default function App() {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    marginBottom: "12px",
+                    marginBottom: "16px",
                   }}
                 >
-                  <h3 style={{ margin: 0 }}>Tambah Produk</h3>
+                  <h3 style={{ margin: 0, color: "#0f172a", fontSize: "18px" }}>
+                    Tambah Produk Baru
+                  </h3>
                   <button
                     type="button"
                     onClick={() => setActiveModal(null)}
@@ -246,21 +303,21 @@ export default function App() {
                       border: "none",
                       cursor: "pointer",
                       fontSize: "16px",
+                      color: "#64748b",
                     }}
                   >
                     ✕
                   </button>
                 </div>
-                <p
+                <label
                   style={{
                     fontSize: "13px",
-                    color: "#64748b",
-                    marginBottom: "16px",
+                    fontWeight: "600",
+                    color: "#334155",
+                    display: "block",
+                    marginBottom: "6px",
                   }}
                 >
-                  Masukkan informasi produk baru.
-                </p>
-                <label style={{ fontSize: "12px", fontWeight: "bold" }}>
                   Nama Produk
                 </label>
                 <input
@@ -270,14 +327,24 @@ export default function App() {
                   onChange={(e) => setInputName(e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "8px",
-                    margin: "4px 0 12px 0",
+                    padding: "10px",
+                    margin: "0 0 16px 0",
                     border: "1px solid #cbd5e1",
-                    borderRadius: "4px",
+                    borderRadius: "6px",
+                    boxSizing: "border-box",
+                    fontSize: "14px",
                   }}
                   required
                 />
-                <label style={{ fontSize: "12px", fontWeight: "bold" }}>
+                <label
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: "600",
+                    color: "#334155",
+                    display: "block",
+                    marginBottom: "6px",
+                  }}
+                >
                   Harga (Rp)
                 </label>
                 <input
@@ -287,17 +354,19 @@ export default function App() {
                   onChange={(e) => setInputPrice(e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "8px",
-                    margin: "4px 0 16px 0",
+                    padding: "10px",
+                    margin: "0 0 20px 0",
                     border: "1px solid #cbd5e1",
-                    borderRadius: "4px",
+                    borderRadius: "6px",
+                    boxSizing: "border-box",
+                    fontSize: "14px",
                   }}
                   required
                 />
                 <div
                   style={{
                     display: "flex",
-                    gap: "8px",
+                    gap: "10px",
                     justifyContent: "flex-end",
                   }}
                 >
@@ -305,11 +374,13 @@ export default function App() {
                     type="button"
                     onClick={() => setActiveModal(null)}
                     style={{
-                      padding: "8px 14px",
+                      padding: "9px 16px",
                       backgroundColor: "white",
                       border: "1px solid #cbd5e1",
-                      borderRadius: "4px",
+                      borderRadius: "6px",
                       cursor: "pointer",
+                      fontWeight: "500",
+                      color: "#334155",
                     }}
                   >
                     Batal
@@ -317,20 +388,22 @@ export default function App() {
                   <button
                     type="submit"
                     style={{
-                      padding: "8px 14px",
+                      padding: "9px 16px",
                       backgroundColor: "#2563eb",
                       color: "white",
                       border: "none",
-                      borderRadius: "4px",
+                      borderRadius: "6px",
                       cursor: "pointer",
+                      fontWeight: "600",
                     }}
                   >
-                    Simpan Produk
+                    Simpan
                   </button>
                 </div>
               </form>
             )}
 
+            {/* Modal Edit */}
             {activeModal === "edit" && (
               <form onSubmit={handleSaveEdit}>
                 <div
@@ -338,10 +411,12 @@ export default function App() {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    marginBottom: "12px",
+                    marginBottom: "16px",
                   }}
                 >
-                  <h3 style={{ margin: 0 }}>Edit Produk</h3>
+                  <h3 style={{ margin: 0, color: "#0f172a", fontSize: "18px" }}>
+                    Edit Produk
+                  </h3>
                   <button
                     type="button"
                     onClick={() => setActiveModal(null)}
@@ -350,6 +425,7 @@ export default function App() {
                       border: "none",
                       cursor: "pointer",
                       fontSize: "16px",
+                      color: "#64748b",
                     }}
                   >
                     ✕
@@ -357,23 +433,22 @@ export default function App() {
                 </div>
                 <p
                   style={{
-                    fontSize: "13px",
-                    color: "#64748b",
-                    marginBottom: "8px",
-                  }}
-                >
-                  Perbarui informasi produk yang dipilih.
-                </p>
-                <p
-                  style={{
                     fontSize: "12px",
                     color: "#94a3b8",
-                    marginBottom: "16px",
+                    margin: "0 0 16px 0",
                   }}
                 >
-                  ID: {selectedProduct.id}
+                  ID Produk: {selectedProduct.id}
                 </p>
-                <label style={{ fontSize: "12px", fontWeight: "bold" }}>
+                <label
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: "600",
+                    color: "#334155",
+                    display: "block",
+                    marginBottom: "6px",
+                  }}
+                >
                   Nama Produk
                 </label>
                 <input
@@ -382,14 +457,24 @@ export default function App() {
                   onChange={(e) => setInputName(e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "8px",
-                    margin: "4px 0 12px 0",
+                    padding: "10px",
+                    margin: "0 0 16px 0",
                     border: "1px solid #cbd5e1",
-                    borderRadius: "4px",
+                    borderRadius: "6px",
+                    boxSizing: "border-box",
+                    fontSize: "14px",
                   }}
                   required
                 />
-                <label style={{ fontSize: "12px", fontWeight: "bold" }}>
+                <label
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: "600",
+                    color: "#334155",
+                    display: "block",
+                    marginBottom: "6px",
+                  }}
+                >
                   Harga (Rp)
                 </label>
                 <input
@@ -398,17 +483,19 @@ export default function App() {
                   onChange={(e) => setInputPrice(e.target.value)}
                   style={{
                     width: "100%",
-                    padding: "8px",
-                    margin: "4px 0 16px 0",
+                    padding: "10px",
+                    margin: "0 0 20px 0",
                     border: "1px solid #cbd5e1",
-                    borderRadius: "4px",
+                    borderRadius: "6px",
+                    boxSizing: "border-box",
+                    fontSize: "14px",
                   }}
                   required
                 />
                 <div
                   style={{
                     display: "flex",
-                    gap: "8px",
+                    gap: "10px",
                     justifyContent: "flex-end",
                   }}
                 >
@@ -416,11 +503,13 @@ export default function App() {
                     type="button"
                     onClick={() => setActiveModal(null)}
                     style={{
-                      padding: "8px 14px",
+                      padding: "9px 16px",
                       backgroundColor: "white",
                       border: "1px solid #cbd5e1",
-                      borderRadius: "4px",
+                      borderRadius: "6px",
                       cursor: "pointer",
+                      fontWeight: "500",
+                      color: "#334155",
                     }}
                   >
                     Batal
@@ -428,12 +517,13 @@ export default function App() {
                   <button
                     type="submit"
                     style={{
-                      padding: "8px 14px",
+                      padding: "9px 16px",
                       backgroundColor: "#2563eb",
                       color: "white",
                       border: "none",
-                      borderRadius: "4px",
+                      borderRadius: "6px",
                       cursor: "pointer",
+                      fontWeight: "600",
                     }}
                   >
                     Simpan Perubahan
@@ -442,6 +532,7 @@ export default function App() {
               </form>
             )}
 
+            {/* Modal Hapus */}
             {activeModal === "delete" && (
               <div>
                 <div
@@ -449,10 +540,12 @@ export default function App() {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    marginBottom: "12px",
+                    marginBottom: "16px",
                   }}
                 >
-                  <h3 style={{ margin: 0, color: "#ef4444" }}>Hapus Produk?</h3>
+                  <h3 style={{ margin: 0, color: "#dc2626", fontSize: "18px" }}>
+                    Hapus Produk
+                  </h3>
                   <button
                     type="button"
                     onClick={() => setActiveModal(null)}
@@ -461,6 +554,7 @@ export default function App() {
                       border: "none",
                       cursor: "pointer",
                       fontSize: "16px",
+                      color: "#64748b",
                     }}
                   >
                     ✕
@@ -468,35 +562,45 @@ export default function App() {
                 </div>
                 <p
                   style={{
-                    fontSize: "13px",
+                    fontSize: "14px",
                     color: "#64748b",
                     marginBottom: "16px",
                   }}
                 >
-                  Produk yang dihapus tidak dapat dikembalikan.
+                  Apakah kamu yakin ingin menghapus produk ini?
                 </p>
                 <div
                   style={{
-                    backgroundColor: "#f1f5f9",
-                    padding: "12px",
-                    borderRadius: "6px",
-                    marginBottom: "16px",
+                    backgroundColor: "#f8fafc",
+                    padding: "14px",
+                    borderRadius: "8px",
+                    marginBottom: "20px",
+                    border: "1px solid #e2e8f0",
                   }}
                 >
-                  <span style={{ fontSize: "12px", color: "#94a3b8" }}>
-                    ID: {selectedProduct.id}
-                  </span>
-                  <div style={{ fontWeight: "bold", color: "#1e293b" }}>
+                  <div
+                    style={{
+                      fontWeight: "600",
+                      color: "#1e293b",
+                      fontSize: "16px",
+                    }}
+                  >
                     {selectedProduct.name}
                   </div>
-                  <div style={{ color: "#2563eb" }}>
+                  <div
+                    style={{
+                      color: "#2563eb",
+                      fontWeight: "500",
+                      marginTop: "4px",
+                    }}
+                  >
                     Rp{selectedProduct.price.toLocaleString("id-ID")}
                   </div>
                 </div>
                 <div
                   style={{
                     display: "flex",
-                    gap: "8px",
+                    gap: "10px",
                     justifyContent: "flex-end",
                   }}
                 >
@@ -504,11 +608,13 @@ export default function App() {
                     type="button"
                     onClick={() => setActiveModal(null)}
                     style={{
-                      padding: "8px 14px",
+                      padding: "9px 16px",
                       backgroundColor: "white",
                       border: "1px solid #cbd5e1",
-                      borderRadius: "4px",
+                      borderRadius: "6px",
                       cursor: "pointer",
+                      fontWeight: "500",
+                      color: "#334155",
                     }}
                   >
                     Batal
@@ -517,15 +623,16 @@ export default function App() {
                     type="button"
                     onClick={handleConfirmDelete}
                     style={{
-                      padding: "8px 14px",
-                      backgroundColor: "#ef4444",
+                      padding: "9px 16px",
+                      backgroundColor: "#dc2626",
                       color: "white",
                       border: "none",
-                      borderRadius: "4px",
+                      borderRadius: "6px",
                       cursor: "pointer",
+                      fontWeight: "600",
                     }}
                   >
-                    Hapus Produk
+                    Ya, Hapus
                   </button>
                 </div>
               </div>
